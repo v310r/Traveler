@@ -1,16 +1,14 @@
-git clone --recursive https://github.com/v310r/Knight.git OR git clone --recurse-submodules https://github.com/v310r/Knight.git to clone the repo
+For this project, a https://github.com/v310r/Knight project was taken as a reference but upgraded (a lot), and basically, a whole new game was created.
+
+git clone --recursive https://github.com/v310r/Traveler.git OR git clone --recurse-submodules https://github.com/v310r/Traveler.git to clone the repo
 
 This project only supports Windows. To support other platforms build settings should be tuned.
 
-To build the project, you should firstly build SFML library. Run cmake in the build folder as it is shown in the picture below:
+To build the project, you should first build the SFML library. Run cmake in the build folder as it is shown in the picture below:
 
-![image](https://github.com/v310r/Knight/assets/80487632/7b82b38b-8d23-4f8e-9f0c-4798d6739517)
-
-Then, go to the root folder and run GenerateProject.bat. Open a solution, choose whatever configuration you'd prefer (Debug or Release) and build the whole solution.
-
-Now you you should be able to play the game, enjoy :-).
+![image](https://github.com/v310r/Traveler/assets/80487632/7930e5e7-408d-4167-a98e-0daff2a6ff21)
 
 
-Platform-based-version:
-![image](https://github.com/v310r/Knight/assets/80487632/d0d9e186-690f-4490-b252-f0afb07fd8f6)
+Then, go to the root folder and run GenerateProject.bat. Open a solution, choose whatever configuration you'd prefer (Debug or Release), and build the whole solution.
 
+Now you should be able to play the game, enjoy :-).
