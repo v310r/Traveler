@@ -1,13 +1,13 @@
 #include "Player.h"
 
 #include "Events/EventManager.h"
-#include "Entities/EntityManager.h"
+#include "Entities/EntityManagerOld.h"
 #include "SharedContext/SharedContext.h"
 #include "Animation/SpriteSheet.h"
 #include "Animation/AnimBase.h"
 
 
-Player::Player(const std::shared_ptr<EntityManager>& entityManager) : Character(entityManager)
+Player::Player(const std::shared_ptr<EntityManagerOld>& entityManager) : Character(entityManager)
 {
 	Load("cfg/Entities/Player.char");
 	m_Type = EntityType::Player;

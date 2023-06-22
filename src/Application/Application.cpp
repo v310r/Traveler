@@ -11,7 +11,7 @@ Application::Application()
 {
 	m_Window = std::make_shared<Window>("Knight", sf::Vector2u(800, 600));
 	m_StateManager = std::make_shared<StateManager>(&m_SharedContext);
-	m_EntityManager = std::make_shared<EntityManager>(&m_SharedContext, 10);
+	m_EntityManager = std::make_shared<EntityManagerOld>(&m_SharedContext, 10);
 	m_TextureManager = std::make_shared<TextureManager>();
 
 

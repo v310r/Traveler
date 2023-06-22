@@ -3,7 +3,7 @@
 #include "Window/Window.h"
 #include "ResourceManagement/TextureManager.h"
 #include "States/StateManager.h"
-#include "Entities/EntityManager.h"
+#include "Entities/EntityManagerOld.h"
 #include "Entities/EntityBase.h"
 #include "Utilities/Profiling.h"
 #include <cmath>
@@ -152,7 +152,7 @@ void Map::LoadMap(const std::string& path)
 			playerId = m_EntityManager->Add(EntityType::Player, "Player");
 			if (playerId < 0)
 			{
-				std::cerr << "Bad player id (EntityManager): " << playerId << ", src: " << __FILE__ << std::endl;
+				std::cerr << "Bad player id (EntityManagerOld): " << playerId << ", src: " << __FILE__ << std::endl;
 				continue;
 			}
 
@@ -177,7 +177,7 @@ void Map::LoadMap(const std::string& path)
 			enemyId = m_EntityManager->Add(EntityType::Enemy, enemyName);
 			if (enemyId < 0)
 			{
-				std::cerr << "Bad enemy id (EntityManager): " << enemyId << ", src: " << __FILE__ << std::endl;
+				std::cerr << "Bad enemy id (EntityManagerOld): " << enemyId << ", src: " << __FILE__ << std::endl;
 				continue;
 			}
 

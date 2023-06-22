@@ -9,16 +9,16 @@
 class EntityBase;
 class SharedContext;
 
-using EntityContainer = std::unordered_map<unsigned int, EntityBase*>;
+using EntityContainerOld = std::unordered_map<unsigned int, EntityBase*>;
 using EntityFactory = std::unordered_map<EntityType, std::function<EntityBase* (void)>>;
 using EnemyTypes = std::unordered_map<std::string, std::string>;
 
-class EntityManager : public std::enable_shared_from_this<EntityManager>
+class EntityManagerOld : public std::enable_shared_from_this<EntityManagerOld>
 {
 public:
-	EntityManager(SharedContext* context, unsigned int maxEntities);
+	EntityManagerOld(SharedContext* context, unsigned int maxEntities);
 
-	~EntityManager();
+	~EntityManagerOld();
 	
 	int Add(EntityType type, const std::string& name = "");
 
@@ -52,7 +52,7 @@ private:
 	void EntityCollisionProcessing();
 
 	// (id, entity)
-	EntityContainer m_Entities;
+	EntityContainerOld m_Entities;
 
 	// (name, characterFile)
 	EnemyTypes m_EnemyTypes;

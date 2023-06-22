@@ -5,7 +5,7 @@ class Window;
 class EventManager;
 class TextureManager;
 class Map;
-class EntityManager;
+class EntityManagerOld;
 
 #include <memory>
 
@@ -52,12 +52,12 @@ public:
 		m_Map = map;
 	}
 
-	std::shared_ptr<EntityManager> GetEntityManager() const
+	std::shared_ptr<EntityManagerOld> GetEntityManager() const
 	{
 		return m_EntityManager.lock();
 	}
 
-	void SetEntityManager(const std::weak_ptr<EntityManager>& entityManager)
+	void SetEntityManager(const std::weak_ptr<EntityManagerOld>& entityManager)
 	{
 		m_EntityManager = entityManager;
 	}
@@ -68,5 +68,5 @@ private:
 	std::weak_ptr<EventManager> m_EventManager;
 	std::weak_ptr<TextureManager> m_TextureManager;
 	std::weak_ptr<Map> m_Map;
-	std::weak_ptr<EntityManager> m_EntityManager;
+	std::weak_ptr<EntityManagerOld> m_EntityManager;
 };

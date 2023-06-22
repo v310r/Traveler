@@ -1,4 +1,4 @@
-#include "EntityManager.h"
+#include "EntityManagerOld.h"
 
 #include <iostream>
 #include <fstream>
@@ -12,7 +12,7 @@
 #include "Enemy.h"
 
 
-EntityManager::EntityManager(SharedContext* context, unsigned int maxEntities)
+EntityManagerOld::EntityManagerOld(SharedContext* context, unsigned int maxEntities)
 	: m_Context(context), m_MaxEntities(maxEntities)
 {
 	LoadEnemyTypes("cfg/Entities/EnemyList.list");
@@ -20,12 +20,12 @@ EntityManager::EntityManager(SharedContext* context, unsigned int maxEntities)
 	RegisterEntity<Enemy>(EntityType::Enemy);
 }
 
-EntityManager::~EntityManager()
+EntityManagerOld::~EntityManagerOld()
 {
 
 }
 
-int EntityManager::Add(EntityType type, const std::string& name)
+int EntityManagerOld::Add(EntityType type, const std::string& name)
 {
 	auto iter = m_EntityFactory.find(type);
 	if (iter == m_EntityFactory.end())
@@ -59,13 +59,13 @@ int EntityManager::Add(EntityType type, const std::string& name)
 	return m_IdCounter - 1;
 }
 
-EntityBase* EntityManager::Find(unsigned int id)
+EntityBase* EntityManagerOld::Find(unsigned int id)
 {
 	auto iter = m_Entities.find(id);
 	return (iter != m_Entities.end()) ? iter->second : nullptr;
 }
 
-EntityBase* EntityManager::Find(const std::string& name)
+EntityBase* EntityManagerOld::Find(const std::string& name)
 {
 	for (auto& [id, entity] : m_Entities)
 	{
@@ -78,12 +78,12 @@ EntityBase* EntityManager::Find(const std::string& name)
 	return nullptr;
 }
 
-void EntityManager::Remove(unsigned int id)
+void EntityManagerOld::Remove(unsigned int id)
 {
 	m_EntitiesToRemove.emplace_back(id);
 }
 
-void EntityManager::Update(float deltaTime)
+void EntityManagerOld::Update(float deltaTime)
 {
 	for (auto& [id, entity] : m_Entities)
 	{
@@ -94,7 +94,7 @@ void EntityManager::Update(float deltaTime)
 	ProcessRemovals();
 }
 
-void EntityManager::Draw()
+void EntityManagerOld::Draw()
 {
 	sf::RenderWindow* const window = m_Context->GetWindow()->GetRenderWindow();
 	const sf::FloatRect viewSpace = m_Context->GetWindow()->GetViewSpace();
@@ -110,7 +110,7 @@ void EntityManager::Draw()
 	}
 }
 
-void EntityManager::PurgeEntities()
+void EntityManagerOld::PurgeEntities()
 {
 	for (auto& [id, entity] : m_Entities)
 	{
@@ -124,7 +124,7 @@ void EntityManager::PurgeEntities()
 	m_IdCounter = 0;
 }
 
-void EntityManager::ProcessRemovals()
+void EntityManagerOld::ProcessRemovals()
 {
 	while (m_EntitiesToRemove.begin() != m_EntitiesToRemove.end())
 	{
@@ -145,7 +145,7 @@ void EntityManager::ProcessRemovals()
 	}
 }
 
-void EntityManager::LoadEnemyTypes(const std::string& path)
+void EntityManagerOld::LoadEnemyTypes(const std::string& path)
 {
 	std::ifstream file;
 	file.open(std::filesystem::current_path() / path);
@@ -170,7 +170,7 @@ void EntityManager::LoadEnemyTypes(const std::string& path)
 	}
 }
 
-void EntityManager::EntityCollisionProcessing()
+void EntityManagerOld::EntityCollisionProcessing()
 {
 	if (m_Entities.empty())
 	{

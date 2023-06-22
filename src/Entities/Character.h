@@ -13,10 +13,10 @@ enum class SpriteDirection;
 
 class Character : public EntityBase
 {
-	friend class EntityManager;
+	friend class EntityManagerOld;
 
 public:
-	Character(const std::shared_ptr<EntityManager>& entityManager);
+	Character(const std::shared_ptr<EntityManagerOld>& entityManager);
 
 	virtual ~Character();
 

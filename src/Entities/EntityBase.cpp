@@ -3,11 +3,11 @@
 #include <SFML/Graphics.hpp>
 #include "World/Map.h"
 #include "Utilities/CollisionHelper.h"
-#include "EntityManager.h"
+#include "EntityManagerOld.h"
 #include <algorithm>
 #include <iostream>
 
-EntityBase::EntityBase(const std::shared_ptr<EntityManager>& entityManager) : m_EntityManager(entityManager)
+EntityBase::EntityBase(const std::shared_ptr<EntityManagerOld>& entityManager) : m_EntityManager(entityManager)
 {
 
 }

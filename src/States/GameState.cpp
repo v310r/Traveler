@@ -4,7 +4,7 @@
 #include "StateManager.h"
 #include "Window/Window.h"
 #include "World/Map.h"
-#include "Entities/EntityManager.h"
+#include "Entities/EntityManagerOld.h"
 #include "Entities/EntityBase.h"
 #include "Utilities/Profiling.h"
 

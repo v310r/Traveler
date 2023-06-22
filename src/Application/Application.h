@@ -3,7 +3,7 @@
 #include "Window/Window.h"
 #include <iostream>
 #include "States/StateManager.h"
-#include "Entities/EntityManager.h"
+#include "Entities/EntityManagerOld.h"
 #include "ResourceManagement/TextureManager.h"
 #include <memory>
 
@@ -35,5 +35,5 @@ private:
 	std::shared_ptr<TextureManager> m_TextureManager;
 	std::shared_ptr<Window> m_Window;
 	std::shared_ptr<StateManager> m_StateManager;
-	std::shared_ptr<EntityManager> m_EntityManager;
+	std::shared_ptr<EntityManagerOld> m_EntityManager;
 };

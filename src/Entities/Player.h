@@ -3,14 +3,14 @@
 #include "Character.h"
 
 
-class EntityManager;
+class EntityManagerOld;
 struct EventDetails;
 
 
 class Player : public Character
 {
 public:
-	Player(const std::shared_ptr<EntityManager>& entityManager);
+	Player(const std::shared_ptr<EntityManagerOld>& entityManager);
 
 	~Player();
 

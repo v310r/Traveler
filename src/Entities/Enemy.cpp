@@ -5,7 +5,7 @@
 #include "Animation/AnimBase.h"
 
 
-Enemy::Enemy(const std::shared_ptr<EntityManager>& entityManager) : Character(entityManager)
+Enemy::Enemy(const std::shared_ptr<EntityManagerOld>& entityManager) : Character(entityManager)
 {
 	m_Type = EntityType::Enemy;
 }

@@ -3,7 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Animation/SpriteDirection.h"
 #include "Animation/SpriteSheet.h"
-#include "Entities/EntityManager.h"
+#include "Entities/EntityManagerOld.h"
 #include "SharedContext/SharedContext.h"
 #include "Animation/AnimBase.h"
 
@@ -21,7 +21,7 @@ constexpr float ANIMATION_THRESHOLD_BY_VELOCITY_Y = 1.0f;
 #endif
 
 
-Character::Character(const std::shared_ptr<EntityManager>& entityManager)
+Character::Character(const std::shared_ptr<EntityManagerOld>& entityManager)
 	: EntityBase(entityManager)
 {
 	m_SpriteSheet = std::make_unique<SpriteSheet>(GetEntityManager()->GetContext()->GetTextureManager());

@@ -3,13 +3,13 @@
 #include "Character.h"
 
 
-class EntityManager;
+class EntityManagerOld;
 
 
 class Enemy : public Character
 {
 public:
-	Enemy(const std::shared_ptr<EntityManager>& entityManager);
+	Enemy(const std::shared_ptr<EntityManagerOld>& entityManager);
 
 	~Enemy();
 

@@ -7,7 +7,7 @@
 #include <memory>
 
 
-class EntityManager;
+class EntityManagerOld;
 namespace sf
 {
 	class RenderWindow;
@@ -17,10 +17,10 @@ struct TileInfo;
 
 class EntityBase
 {
-	friend class EntityManager;
+	friend class EntityManagerOld;
 
 public:
-	EntityBase(const std::shared_ptr<EntityManager>& entityManager);
+	EntityBase(const std::shared_ptr<EntityManagerOld>& entityManager);
 
 	virtual ~EntityBase();
 
@@ -67,7 +67,7 @@ public:
 
 	unsigned int GetId() const { return m_ID; }
 
-	std::shared_ptr<EntityManager>& GetEntityManager() { return m_EntityManager; }
+	std::shared_ptr<EntityManagerOld>& GetEntityManager() { return m_EntityManager; }
 
 protected:
 	/*
@@ -107,6 +107,6 @@ protected:
 #ifdef _DEBUG
 	Collisions m_DebugCollisions;
 #endif
-	std::shared_ptr<EntityManager> m_EntityManager;
+	std::shared_ptr<EntityManagerOld> m_EntityManager;
 
 };
