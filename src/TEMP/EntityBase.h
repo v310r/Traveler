@@ -57,13 +57,13 @@ public:
 	void SetSize(float x, float y);
 	void SetSize(sf::Vector2f size);
 
-	void SetState(EntityState state);
-	EntityState GetState() const { return m_State; }
+	void SetState(EEntityState state);
+	EEntityState GetState() const { return m_State; }
 
 
 	const std::string& GetName() const { return m_Name; }
 
-	EntityType GetType() const { return m_Type; }
+	EEntityType GetType() const { return m_Type; }
 
 	unsigned int GetId() const { return m_ID; }
 
@@ -82,7 +82,7 @@ protected:
 	void ResolveCollisions();
 
 	std::string m_Name = "BaseEntity";
-	EntityType	m_Type = EntityType::Base;
+	EEntityType	m_Type = EEntityType::Base;
 	unsigned int m_ID = 0;
 
 	sf::Vector2f m_Position;
@@ -98,7 +98,7 @@ protected:
 	sf::FloatRect m_AABB;
 	sf::Vector2f m_Size;
 
-	EntityState m_State = EntityState::Idle;
+	EEntityState m_State = EEntityState::Idle;
 
 	bool m_bCollidingOnX = false;
 	bool m_bCollidingOnY = false;

@@ -7,7 +7,7 @@
 
 Enemy::Enemy(const std::shared_ptr<EntityManagerOld>& entityManager) : Character(entityManager)
 {
-	m_Type = EntityType::Enemy;
+	m_Type = EEntityType::Enemy;
 }
 
 Enemy::~Enemy()
@@ -17,7 +17,7 @@ Enemy::~Enemy()
 
 void Enemy::OnEntityCollision(EntityBase* collidedEntity, bool bAttack)
 {
-	if (m_State == EntityState::Dying || !bAttack || collidedEntity->GetType() != EntityType::Player)
+	if (m_State == EEntityState::Dying || !bAttack || collidedEntity->GetType() != EEntityType::Player)
 	{
 		return;
 	}
@@ -28,7 +28,7 @@ void Enemy::OnEntityCollision(EntityBase* collidedEntity, bool bAttack)
 	}
 
 	Character* player = static_cast<Character*>(collidedEntity);
-	SetState(EntityState::Attacking);
+	SetState(EEntityState::Attacking);
 	player->GetHurt(1);
 
 	if (m_Position.x > player->GetPosition().x)

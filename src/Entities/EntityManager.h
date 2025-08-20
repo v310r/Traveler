@@ -2,16 +2,15 @@
 
 #include "ResourceManagement/TextureManager.h"
 #include "Utilities/Bitmask.h"
-#include "BaseComponent.h"
+#include "Components/BaseComponent.h"
 #include <functional>
+#include "Utilities/EntityHelper.h"
 
-
-using EntityId = unsigned int;
 
 using ComponentContainer = std::vector<BaseComponent*>;
 using EntityData = std::pair<Bitmask, ComponentContainer>;
 using EntityContainer = std::unordered_map<EntityId, EntityData>;
-using ComponentFactory = std::unordered_map<Component, std::function<BaseComponent*(void)>>;
+using ComponentFactory = std::unordered_map<EComponent, std::function<BaseComponent*(void)>>;
 
 
 class SystemManager;
@@ -28,10 +27,10 @@ public:
 
 	bool RemoveEntity(EntityId entityId);
 
-	bool AddComponent(EntityId entityId, Component component);
+	bool AddComponent(EntityId entityId, EComponent component);
 
 	template<typename T>
-	T* GetComponent(EntityId entityId, Component component)
+	T* GetComponent(EntityId entityId, EComponent component)
 	{
 		auto iter = m_Entities.find(entityId);
 		if (iter == m_Entities.end())
@@ -39,7 +38,7 @@ public:
 			return nullptr;
 		}
 
-		auto& [entityId, entityData] = *iter;
+		auto& [entityID, entityData] = *iter;
 		auto& [bitmask, componentContainer] = entityData;
 
 		if (!bitmask.GetBit(static_cast<unsigned int>(component)))
@@ -53,17 +52,17 @@ public:
 			return c->GetType() == component;
 		});
 
-		return (comp != componentContainer.end() ? dynamic_cast<T*>(*component) : nullptr);
+		return (comp != componentContainer.end() ? dynamic_cast<T*>(*comp) : nullptr);
 	}
 
-	bool RemoveComponent(EntityId entityId, Component component);
+	bool RemoveComponent(EntityId entityId, EComponent component);
 
-	bool HasComponent(EntityId entityId, Component component);
+	bool HasComponent(EntityId entityId, EComponent component);
 
 	void Purge();
 private:
 	template<typename T>
-	void AddComponentType(Component component)
+	void AddComponentType(EComponent component)
 	{
 		m_ComponentFactory[component] = []() -> BaseComponent*
 		{

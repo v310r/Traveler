@@ -32,7 +32,7 @@ void EntityBase::Update(float deltaTime)
 		frictionValue = m_ReferenceTile->Friction;
 		if (m_ReferenceTile->bDeadly)
 		{
-			SetState(EntityState::Dying);
+			SetState(EEntityState::Dying);
 		}
 		else if (frictionValue.x != -1.0f && frictionValue.y != -1.0f)
 		{
@@ -72,7 +72,7 @@ void EntityBase::Move(sf::Vector2f position)
 	m_Position += position;
 
 	const sf::Vector2u mapSize = GetEntityManager()->GetContext()->GetMap()->GetMapSize();
-	const sf::Vector2u UnitMapSize = mapSize * static_cast<unsigned int>(TileSheet::TileSize);
+	const sf::Vector2u UnitMapSize = mapSize * static_cast<unsigned int>(ETileSheet::TileSize);
 
 	const sf::Vector2f bodyOffset = m_Size / 2.0f;
 	if (m_Position.x - bodyOffset.x < 0.0f)
@@ -91,7 +91,7 @@ void EntityBase::Move(sf::Vector2f position)
 	else if (m_Position.y > UnitMapSize.y)
 	{
 		m_Position.y = static_cast<float>(UnitMapSize.y);
-		SetState(EntityState::Dying);
+		SetState(EEntityState::Dying);
 	}
 
 	UpdateAABB();
@@ -231,9 +231,9 @@ void EntityBase::SetSize(sf::Vector2f size)
 	UpdateAABB();
 }
 
-void EntityBase::SetState(EntityState state)
+void EntityBase::SetState(EEntityState state)
 {
-	if (m_State == EntityState::Dying)
+	if (m_State == EEntityState::Dying)
 	{
 		return;
 	}
@@ -274,7 +274,7 @@ void EntityBase::DetectCollisions()
 
 			const float area = intersection.width * intersection.height;
 			m_Collisions.emplace_back(CollisionManifold(area, tile->Properties, tile->AABB));
-			if (tile->bWarp && m_Type == EntityType::Player)
+			if (tile->bWarp && m_Type == EEntityType::Player)
 			{
 				map->LoadNext();
 			}

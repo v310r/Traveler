@@ -4,8 +4,8 @@
 #include "StateManager.h"
 #include "Window/Window.h"
 #include "World/Map.h"
-#include "Entities/EntityManagerOld.h"
-#include "Entities/EntityBase.h"
+#include "TEMP/EntityManagerOld.h"
+#include "TEMP/EntityBase.h"
 #include "Utilities/Profiling.h"
 
 
@@ -56,7 +56,7 @@ void GameState::Update(const float deltaTime)
 	if (!player)
 	{
 		std::cout << "Respawning player..." << ", src: " << __FILE__ <<  std::endl;
-		context->GetEntityManager()->Add(EntityType::Player, "Player");
+		context->GetEntityManager()->Add(EEntityType::Player, "Player");
 		player = context->GetEntityManager()->Find("Player");
 		player->SetPosition(m_Map->GetPlayerStart());
 	}
@@ -72,9 +72,9 @@ void GameState::Update(const float deltaTime)
 		m_View.setCenter(viewSpace.width / 2.0f, m_View.getCenter().y);
 		context->GetWindow()->GetRenderWindow()->setView(m_View);
 	}
-	else if (viewSpace.left + viewSpace.width > m_Map->GetMapSize().x * TileSheet::TileSize)
+	else if (viewSpace.left + viewSpace.width > m_Map->GetMapSize().x * ETileSheet::TileSize)
 	{
-		m_View.setCenter((m_Map->GetMapSize().x * TileSheet::TileSize) - (viewSpace.width / 2.0f), m_View.getCenter().y);
+		m_View.setCenter((m_Map->GetMapSize().x * ETileSheet::TileSize) - (viewSpace.width / 2.0f), m_View.getCenter().y);
 		context->GetWindow()->GetRenderWindow()->setView(m_View);
 	}
 

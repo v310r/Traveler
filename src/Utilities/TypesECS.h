@@ -3,7 +3,7 @@
 using ComponentType = unsigned int;
 constexpr int MAX_COMPONENT_TYPES = 32;
 
-enum class Component
+enum class EComponent
 {
 	Position = 0,
 	SpriteSheet,
@@ -13,10 +13,10 @@ enum class Component
 	Collider
 };
 
-enum class System
+enum class ESystem
 {
 	Renderer = 0,
-	Motion,
+	Movement,
 	Collision,
 	Control,
 	State,

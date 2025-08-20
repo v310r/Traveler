@@ -9,8 +9,8 @@
 class EntityBase;
 class SharedContext;
 
-using EntityContainerOld = std::unordered_map<unsigned int, EntityBase*>;
-using EntityFactory = std::unordered_map<EntityType, std::function<EntityBase* (void)>>;
+using EntityContainer2 = std::unordered_map<unsigned int, EntityBase*>;
+using EntityFactory = std::unordered_map<EEntityType, std::function<EntityBase* (void)>>;
 using EnemyTypes = std::unordered_map<std::string, std::string>;
 
 class EntityManagerOld : public std::enable_shared_from_this<EntityManagerOld>
@@ -20,7 +20,7 @@ public:
 
 	~EntityManagerOld();
 	
-	int Add(EntityType type, const std::string& name = "");
+	int Add(EEntityType type, const std::string& name = "");
 
 	EntityBase* Find(unsigned int id);
 	EntityBase* Find(const std::string& name);
@@ -37,7 +37,7 @@ public:
 
 private:
 	template<class T>
-	void RegisterEntity(EntityType type)
+	void RegisterEntity(EEntityType type)
 	{
 		m_EntityFactory[type] = [this]() -> EntityBase*
 		{
@@ -52,7 +52,7 @@ private:
 	void EntityCollisionProcessing();
 
 	// (id, entity)
-	EntityContainerOld m_Entities;
+	EntityContainer2 m_Entities;
 
 	// (name, characterFile)
 	EnemyTypes m_EnemyTypes;

@@ -5,7 +5,7 @@
 #include "ResourceManagement/ResourceManager.h"
 #include "Utilities/Profiling.h"
 
-#include "ECS/EntityManager.h"
+#include "Entities/EntityManager.h"
 
 int main()
 {

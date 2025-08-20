@@ -3,7 +3,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include "Animation/SpriteDirection.h"
 #include "Animation/SpriteSheet.h"
-#include "Entities/EntityManagerOld.h"
+#include "EntityManagerOld.h"
 #include "SharedContext/SharedContext.h"
 #include "Animation/AnimBase.h"
 
@@ -42,29 +42,29 @@ void Character::Update(float deltaTime)
 		UpdateAttackAABB();
 	}
 
-	if (m_State != EntityState::Dying && m_State != EntityState::Attacking && m_State != EntityState::Hurt)
+	if (m_State != EEntityState::Dying && m_State != EEntityState::Attacking && m_State != EEntityState::Hurt)
 	{
 		if (std::abs(m_Velocity.y) >= ANIMATION_THRESHOLD_BY_VELOCITY_Y)
 		{
-			SetState(EntityState::Jumping);
+			SetState(EEntityState::Jumping);
 		}
 		else if (std::abs(m_Velocity.x) >= ANIMATION_THRESHOLD_BY_VELOCITY_X && m_bCollidingOnY)
 		{
-			SetState(EntityState::Walking);
+			SetState(EEntityState::Walking);
 		}
 		else if (m_bCollidingOnY)
 		{
-			SetState(EntityState::Idle);
+			SetState(EEntityState::Idle);
 		}
 	}
-	else if (m_State == EntityState::Attacking || m_State == EntityState::Hurt)
+	else if (m_State == EEntityState::Attacking || m_State == EEntityState::Hurt)
 	{
 		if (!m_SpriteSheet->GetCurrentAnimation()->IsPlaying())
 		{
-			SetState(EntityState::Idle);
+			SetState(EEntityState::Idle);
 		}
 	}
-	else if (m_State == EntityState::Dying)
+	else if (m_State == EEntityState::Dying)
 	{
 		if (!m_SpriteSheet->GetCurrentAnimation()->IsPlaying())
 		{
@@ -100,7 +100,7 @@ void Character::Draw(sf::RenderWindow* window)
 
 void Character::Move(const SpriteDirection& direction)
 {
-	if (m_State == EntityState::Dying)
+	if (m_State == EEntityState::Dying)
 	{
 		return;
 	}
@@ -116,36 +116,36 @@ void Character::Move(const SpriteDirection& direction)
 		Accelerate(m_Speed.x, 0.0f);
 	}
 
-	if (m_State == EntityState::Idle)
+	if (m_State == EEntityState::Idle)
 	{
-		SetState(EntityState::Walking);
+		SetState(EEntityState::Walking);
 	}
 }
 
 void Character::Jump()
 {
-	if (m_State == EntityState::Dying || m_State == EntityState::Jumping || m_State == EntityState::Hurt)
+	if (m_State == EEntityState::Dying || m_State == EEntityState::Jumping || m_State == EEntityState::Hurt)
 	{
 		return;
 	}
 
-	SetState(EntityState::Jumping);
+	SetState(EEntityState::Jumping);
 	AddVelocity(0.0f, -m_JumpVelocity);
 }
 
 void Character::Attack()
 {
-	if (m_State == EntityState::Dying || m_State == EntityState::Jumping || m_State == EntityState::Hurt || m_State == EntityState::Attacking)
+	if (m_State == EEntityState::Dying || m_State == EEntityState::Jumping || m_State == EEntityState::Hurt || m_State == EEntityState::Attacking)
 	{
 		return;
 	}
 
-	SetState(EntityState::Attacking);
+	SetState(EEntityState::Attacking);
 }
 
 void Character::GetHurt(int damage)
 {
-	if (m_State == EntityState::Dying || m_State == EntityState::Hurt)
+	if (m_State == EEntityState::Dying || m_State == EEntityState::Hurt)
 	{
 		return;
 	}
@@ -154,11 +154,11 @@ void Character::GetHurt(int damage)
 
 	if (m_Health)
 	{
-		SetState(EntityState::Hurt);
+		SetState(EEntityState::Hurt);
 	}
 	else
 	{
-		SetState(EntityState::Dying);
+		SetState(EEntityState::Dying);
 	}
 }
 
@@ -235,27 +235,27 @@ void Character::UpdateAttackAABB()
 
 void Character::Animate()
 {
-	if (m_State == EntityState::Walking && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Walk")
+	if (m_State == EEntityState::Walking && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Walk")
 	{
 		m_SpriteSheet->SetAnimation("Walk", true, true);
 	}
-	else if (m_State == EntityState::Jumping && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Jump")
+	else if (m_State == EEntityState::Jumping && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Jump")
 	{
 		m_SpriteSheet->SetAnimation("Jump", true, false);
 	}
-	else if (m_State == EntityState::Attacking && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Attack")
+	else if (m_State == EEntityState::Attacking && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Attack")
 	{
 		m_SpriteSheet->SetAnimation("Attack", true, false);
 	}
-	else if (m_State == EntityState::Hurt && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Hurt")
+	else if (m_State == EEntityState::Hurt && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Hurt")
 	{
 		m_SpriteSheet->SetAnimation("Hurt", true, false);
 	}
-	else if (m_State == EntityState::Dying && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Death")
+	else if (m_State == EEntityState::Dying && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Death")
 	{
 		m_SpriteSheet->SetAnimation("Death", true, false);
 	}
-	else if (m_State == EntityState::Idle && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Idle")
+	else if (m_State == EEntityState::Idle && m_SpriteSheet->GetCurrentAnimation()->GetName() != "Idle")
 	{
 		m_SpriteSheet->SetAnimation("Idle", true, true);
 	}

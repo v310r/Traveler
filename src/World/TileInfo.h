@@ -10,7 +10,7 @@ class SharedContext;
 
 struct TileInfo
 {
-	TileInfo(SharedContext* context, const std::string& textureName = "TileSheet", TileID id = 0);
+	TileInfo(SharedContext* context, const std::string& textureName = "ETileSheet", TileID id = 0);
 
 	~TileInfo();
 

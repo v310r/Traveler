@@ -1,6 +1,7 @@
 #include "PositionComponent.h"
 
-PositionComponent::PositionComponent() : BaseComponent(Component::Position), m_Elevation(0)
+
+PositionComponent::PositionComponent() : BaseComponent(EComponent::Position), m_Elevation(0)
 {
 
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-enum TileSheet
+enum ETileSheet
 {
 	TileSize = 32,
 	Width = 256,

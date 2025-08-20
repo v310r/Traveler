@@ -1,7 +1,7 @@
 #include "Player.h"
 
 #include "Events/EventManager.h"
-#include "Entities/EntityManagerOld.h"
+#include "EntityManagerOld.h"
 #include "SharedContext/SharedContext.h"
 #include "Animation/SpriteSheet.h"
 #include "Animation/AnimBase.h"
@@ -10,7 +10,7 @@
 Player::Player(const std::shared_ptr<EntityManagerOld>& entityManager) : Character(entityManager)
 {
 	Load("cfg/Entities/Player.char");
-	m_Type = EntityType::Player;
+	m_Type = EEntityType::Player;
 
 	std::shared_ptr<EventManager> eventManager = GetEntityManager()->GetContext()->GetEventManager();
 	eventManager->AddCallback<Player>(StateType::Game, "Player_MoveLeft", &Player::MoveLeft, this);
@@ -50,14 +50,14 @@ void Player::Update(float deltaTime)
 
 void Player::OnEntityCollision(EntityBase* collidedEntity, bool bAttack)
 {
-	if (m_State == EntityState::Dying)
+	if (m_State == EEntityState::Dying)
 	{
 		return;
 	}
 
 	if (bAttack)
 	{
-		if (m_State != EntityState::Attacking)
+		if (m_State != EEntityState::Attacking)
 		{
 			return;
 		}
@@ -67,7 +67,7 @@ void Player::OnEntityCollision(EntityBase* collidedEntity, bool bAttack)
 			return;
 		}
 
-		if (collidedEntity->GetType() != EntityType::Enemy && collidedEntity->GetType() != EntityType::Player)
+		if (collidedEntity->GetType() != EEntityType::Enemy && collidedEntity->GetType() != EEntityType::Player)
 		{
 			return;
 		}

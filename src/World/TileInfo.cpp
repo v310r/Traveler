@@ -28,10 +28,10 @@ TileInfo::TileInfo(SharedContext* context, const std::string& textureName, TileI
 		Sprite.setTexture(*texture);
 	}
 
-	const int LeftX = ID % (TileSheet::Width / TileSheet::TileSize) * TileSheet::TileSize;
-	const int LeftY = ID / (TileSheet::Height / TileSheet::TileSize) * TileSheet::TileSize;
-	const int SizeX = TileSheet::TileSize;
-	const int SizeY = TileSheet::TileSize;
+	const int LeftX = ID % (ETileSheet::Width / ETileSheet::TileSize) * ETileSheet::TileSize;
+	const int LeftY = ID / (ETileSheet::Height / ETileSheet::TileSize) * ETileSheet::TileSize;
+	const int SizeX = ETileSheet::TileSize;
+	const int SizeY = ETileSheet::TileSize;
 	const sf::IntRect tileBoundaries(LeftX, LeftY, SizeX, SizeY);
 	Sprite.setTextureRect(tileBoundaries);
 }

@@ -3,8 +3,8 @@
 #include "Window/Window.h"
 #include "ResourceManagement/TextureManager.h"
 #include "States/StateManager.h"
-#include "Entities/EntityManagerOld.h"
-#include "Entities/EntityBase.h"
+#include "TEMP/EntityManagerOld.h"
+#include "TEMP/EntityBase.h"
 #include "Utilities/Profiling.h"
 #include <cmath>
 
@@ -88,7 +88,7 @@ void Map::LoadMap(const std::string& path)
 				continue;
 			}
 
-			tile->AABB = sf::FloatRect(tileCoords.x * static_cast<float>(TileSheet::TileSize), tileCoords.y * static_cast<float>(TileSheet::TileSize), static_cast<float>(TileSheet::TileSize), static_cast<float>(TileSheet::TileSize));
+			tile->AABB = sf::FloatRect(tileCoords.x * static_cast<float>(ETileSheet::TileSize), tileCoords.y * static_cast<float>(ETileSheet::TileSize), static_cast<float>(ETileSheet::TileSize), static_cast<float>(ETileSheet::TileSize));
 
 			std::string warp;
 			keystream >> warp;
@@ -149,7 +149,7 @@ void Map::LoadMap(const std::string& path)
 				continue;
 			}
 
-			playerId = m_EntityManager->Add(EntityType::Player, "Player");
+			playerId = m_EntityManager->Add(EEntityType::Player, "Player");
 			if (playerId < 0)
 			{
 				std::cerr << "Bad player id (EntityManagerOld): " << playerId << ", src: " << __FILE__ << std::endl;
@@ -174,7 +174,7 @@ void Map::LoadMap(const std::string& path)
 			std::string enemyName;
 			keystream >> enemyName;
 
-			enemyId = m_EntityManager->Add(EntityType::Enemy, enemyName);
+			enemyId = m_EntityManager->Add(EEntityType::Enemy, enemyName);
 			if (enemyId < 0)
 			{
 				std::cerr << "Bad enemy id (EntityManagerOld): " << enemyId << ", src: " << __FILE__ << std::endl;
@@ -227,10 +227,10 @@ void Map::Draw()
 	*	
 	*	ViewSpace could be dependent on player (GameState). It could depend on various States.
 	*/
-	const int beginX = static_cast<int>(std::floor(viewSpace.left / TileSheet::TileSize));
-	const int beginY = static_cast<int>(std::floor(viewSpace.top / TileSheet::TileSize));
-	const int endX   = std::min(static_cast<int>(std::ceil((viewSpace.left + viewSpace.width) / TileSheet::TileSize)), static_cast<int>(m_MaxSize.x));
-	const int endY   = std::min(static_cast<int>(std::ceil((viewSpace.top + viewSpace.height) / TileSheet::TileSize)), static_cast<int>(m_MaxSize.y));
+	const int beginX = static_cast<int>(std::floor(viewSpace.left / ETileSheet::TileSize));
+	const int beginY = static_cast<int>(std::floor(viewSpace.top / ETileSheet::TileSize));
+	const int endX   = std::min(static_cast<int>(std::ceil((viewSpace.left + viewSpace.width) / ETileSheet::TileSize)), static_cast<int>(m_MaxSize.x));
+	const int endY   = std::min(static_cast<int>(std::ceil((viewSpace.top + viewSpace.height) / ETileSheet::TileSize)), static_cast<int>(m_MaxSize.y));
 
 	const sf::Vector2i tileBegin(beginX, beginY);
 	const sf::Vector2i tileEnd(endX, endY);
@@ -252,8 +252,8 @@ void Map::Draw()
 
 			sf::Sprite& sprite = tile->Properties->Sprite;
 
-			const float posX = static_cast<float>(x * TileSheet::TileSize);
-			const float posY = static_cast<float>(y * TileSheet::TileSize);
+			const float posX = static_cast<float>(x * ETileSheet::TileSize);
+			const float posY = static_cast<float>(y * ETileSheet::TileSize);
 			sprite.setPosition(posX, posY);
 
 			window->draw(sprite);
@@ -297,7 +297,7 @@ void Map::LoadTiles(const std::string& path)
 			continue;
 		}
 
-		TileInfo* tileInfo = new TileInfo(m_Context, "TileSheet", tileID);
+		TileInfo* tileInfo = new TileInfo(m_Context, "ETileSheet", tileID);
 		keystream >> tileInfo->Name >> tileInfo->Friction.x >> tileInfo->Friction.y >> tileInfo->bDeadly;
 
 		if (!m_TileSet.emplace(tileID, tileInfo).second)

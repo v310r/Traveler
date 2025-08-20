@@ -28,7 +28,7 @@ public:
 	float GetGravity() const { return m_Gravity; }
 	void SetGravity(float value) { m_Gravity = value; }
 
-	unsigned int GetTileSize() const { return TileSheet::TileSize; }
+	unsigned int GetTileSize() const { return ETileSheet::TileSize; }
 
 	const sf::Vector2u& GetMapSize() const { return m_MaxSize; }
 
